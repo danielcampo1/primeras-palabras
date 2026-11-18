@@ -15,8 +15,7 @@ export default function Home() {
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: "8rem" }}></div>
-        🐕
+        <div style={{ fontSize: "8rem" }}>🐕</div>
         <p style={{ fontSize: "3rem", margin: 0 }}>Perro</p>
         <p style={{ fontSize: "3rem", margin: 0 }}>Dog</p>
       </div>
