@@ -50,7 +50,7 @@ export type Word = {
   id: string; // "perro"
   es: string; // "Perro"
   en: string; // "Dog"
-  emoji: string; // "🐕"
+  animal: string; // "🐕"
   audio?: { es?: string; en?: string }; // phase 2 file paths
 };
 ```

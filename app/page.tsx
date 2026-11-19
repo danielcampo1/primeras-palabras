@@ -7,13 +7,13 @@ export default function Home() {
         placeItems: "center",
       }}
     >
-      <WordCard />
-      <WordCard />
+      <WordCard animal="🐕" es="5" en="Dog" />
+      <WordCard animal="🐎" es="Caballo" en="hourse" />
     </main>
   );
 }
 
-function WordCard() {
+function WordCard({ animal, es, en }: WordCardProps) {
   return (
     <div
       style={{
@@ -23,9 +23,14 @@ function WordCard() {
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: "8rem" }}>🐕</div>
-      <p style={{ fontSize: "3rem", margin: 0 }}>Perro</p>
-      <p style={{ fontSize: "3rem", margin: 0 }}>Dog</p>
+      <div style={{ fontSize: "8rem" }}>{animal}</div>
+      <p style={{ fontSize: "3rem", margin: 0 }}>{es}</p>
+      <p style={{ fontSize: "3rem", margin: 0 }}>{en}</p>
     </div>
   );
 }
+type WordCardProps = {
+  animal: string;
+  es: string;
+  en: string;
+};
