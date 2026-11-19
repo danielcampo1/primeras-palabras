@@ -7,8 +7,8 @@ export default function Home() {
         placeItems: "center",
       }}
     >
-      <WordCard emoji="🐕" es="5" en="Dog" />
-      <WordCard emoji="🐎" es="Caballo" en="hourse" />
+      <WordCard emoji="🐕" es="dog" en="Dog" />
+      <WordCard emoji="🐎" es="Caballo" en="horse" />
     </main>
   );
 }
