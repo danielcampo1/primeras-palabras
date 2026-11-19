@@ -20,8 +20,22 @@ Because of job 2, see "How to work with Daniel" below. It matters as much as the
 ## Current state (Nov 19, 2026)
 
 - Done: app scaffolded and deployed to Vercel.
-- Done (Nov 18): two word cards on screen. The first is 🐕 Perro / Dog.
-- Next: move the words into a typed list (`app/words.ts`) if that isn't done yet, render the cards with `.map()`, and make each card a `<button>` with an accessible name, working toward 12 cards and tap-to-hear audio.
+- Done (Nov 18): two word cards on screen (🐕 Perro / Dog, 🐎 Caballo / Horse).
+- Done (Nov 19): extracted a reusable `WordCard` component in `app/page.tsx` with typed props (`WordCardProps`: `emoji`, `es`, `en`, all strings). Card markup now exists once; `Home` renders `<WordCard />` twice with hardcoded props. Merged to `main` via PR #1 (squash merge).
+- Next (Task 5): create `app/words.ts` with the `Word` type and a `words` array, then render cards in `page.tsx` with `.map()` (remember the `key` prop). Done when adding a word only means editing `words.ts`.
+- After that: make each card a `<button>` with an accessible name ("Perro, dog"), `lang="es"` on Spanish text, and the emoji `aria-hidden`.
+
+### Workflow habits now in use
+
+- One feature branch per task; push WIP to the branch, never broken code to `main` (Vercel auto-deploys `main`).
+- Review your own diff (`git diff main`) before opening a PR.
+- Merge via GitHub PR with **squash and merge**; trim the squash commit message to one clear line.
+- Check types with `npx tsc --noEmit` (or `npm run build`) before merging.
+
+### Cleanup backlog
+
+- Tailwind is still installed (`globals.css` import + `package.json`) even though the brief says no Tailwind. Remove it in a small dedicated task.
+- `README.md` is still the create-next-app template.
 
 ## Milestones
 
