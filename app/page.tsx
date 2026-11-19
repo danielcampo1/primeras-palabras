@@ -7,13 +7,19 @@ export default function Home() {
         placeItems: "center",
       }}
     >
-      <WordCard animal="🐕" es="5" en="Dog" />
-      <WordCard animal="🐎" es="Caballo" en="hourse" />
+      <WordCard emoji="🐕" es="5" en="Dog" />
+      <WordCard emoji="🐎" es="Caballo" en="hourse" />
     </main>
   );
 }
 
-function WordCard({ animal, es, en }: WordCardProps) {
+type WordCardProps = {
+  emoji: string;
+  es: string;
+  en: string;
+};
+
+function WordCard({ emoji, es, en }: WordCardProps) {
   return (
     <div
       style={{
@@ -23,14 +29,9 @@ function WordCard({ animal, es, en }: WordCardProps) {
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: "8rem" }}>{animal}</div>
+      <div style={{ fontSize: "8rem" }}>{emoji}</div>
       <p style={{ fontSize: "3rem", margin: 0 }}>{es}</p>
       <p style={{ fontSize: "3rem", margin: 0 }}>{en}</p>
     </div>
   );
 }
-type WordCardProps = {
-  animal: string;
-  es: string;
-  en: string;
-};
