@@ -19,16 +19,17 @@ Because of job 2, see "How to work with Daniel" below. It matters as much as the
 
 ## Current state (Nov 19, 2026)
 
-- Done: app scaffolded, deployed, one card on screen (🐕 Perro / Dog).
-- In progress: moving words into a typed list (`app/words.ts`) and rendering cards with `.map()`.
+- Done: app scaffolded and deployed to Vercel.
+- Done (Nov 18): two word cards on screen. The first is 🐕 Perro / Dog.
+- Next: move the words into a typed list (`app/words.ts`) if that isn't done yet, render the cards with `.map()`, and make each card a `<button>` with an accessible name, working toward 12 cards and tap-to-hear audio.
 
 ## Milestones
 
-| By | Goal |
-|---|---|
-| Sat Dec 6 | Both languages working; tap a card to hear Spanish then English; fully usable by keyboard and screen reader |
-| Sun Dec 20 | Playwright + axe-core tests passing in GitHub Actions on every push |
-| Thu Dec 24 | v1: 12 cards, in the kids' hands on a phone |
+| By         | Goal                                                                                                        |
+| ---------- | ----------------------------------------------------------------------------------------------------------- |
+| Sat Dec 6  | Both languages working; tap a card to hear Spanish then English; fully usable by keyboard and screen reader |
+| Sun Dec 20 | Playwright + axe-core tests passing in GitHub Actions on every push                                         |
+| Thu Dec 24 | v1: 12 cards, in the kids' hands on a phone                                                                 |
 
 ## What v1 looks like
 
@@ -46,10 +47,10 @@ Because of job 2, see "How to work with Daniel" below. It matters as much as the
 
 ```ts
 export type Word = {
-  id: string;        // "perro"
-  es: string;        // "Perro"
-  en: string;        // "Dog"
-  emoji: string;     // "🐕"
+  id: string; // "perro"
+  es: string; // "Perro"
+  en: string; // "Dog"
+  emoji: string; // "🐕"
   audio?: { es?: string; en?: string }; // phase 2 file paths
 };
 ```
