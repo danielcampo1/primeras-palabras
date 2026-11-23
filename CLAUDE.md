@@ -31,11 +31,33 @@ Because of job 2, see "How to work with Daniel" below. It matters as much as the
 - Review your own diff (`git diff main`) before opening a PR.
 - Merge via GitHub PR with **squash and merge**; trim the squash commit message to one clear line.
 - Check types with `npx tsc --noEmit` (or `npm run build`) before merging.
+- Run `npm run lint` along with `npx tsc --noEmit` before opening a PR.
+- Merge only when `main` would be better, or at least no worse. No regressions to the live app.
+- Every commit on `main` should work. That's why we squash merge: the step-by-step history stays in the PR.
+- Commit messages are imperative: they should complete "This commit will…" (e.g. "Add words list", not "added words list").
+- PR description: what changed, why, and how it was checked.
+- After merging: delete the branch, `git checkout main && git pull`, then check the live Vercel URL. That's the real "done".
+- Never rewrite `main`'s history to fix cosmetic issues (like a messy squash message). Do better next time.
 
 ### Cleanup backlog
 
 - Tailwind is still installed (`globals.css` import + `package.json`) even though the brief says no Tailwind. Remove it in a small dedicated task.
 - `README.md` is still the create-next-app template.
+
+### Roadmap (one task per block)
+
+**Dec 6 milestone:**
+
+5. `app/words.ts` + render with `.map()` ← next
+6. Card is a `<button>` with an accessible name, `lang="es"` and the emoji `aria-hidden`
+7. Grid layout (1–2 per row on a phone) + visible focus outline
+8. Tap to say the Spanish word (`speechSynthesis`)
+9. Then English after a pause, with a "playing" highlight
+
+**Can slip to the following week:**
+
+10. `prefers-reduced-motion`; remove Tailwind
+11. Update the README; grow to 12 words
 
 ## Milestones
 
@@ -85,11 +107,28 @@ Suggested first 12 words: perro, gato, pelota, leche, agua, mamá, papá, carro,
 
 Accounts, a backend or database, analytics or tracking, quizzes and scores, paid features, heavy animation, a UI library. Ideas for later go in a "Later" list in the README, not into the code.
 
+## Code conventions
+
+- Put types at the top of the file, before the code that uses them.
+- Name things for what they are, not for the first examples (`emoji`, not `animal`; a 🚗 isn't an animal).
+- Props: destructure them in the function signature and type them with a named `type XProps`.
+- Next.js here is v16. Check `node_modules/next/dist/docs/` before following online tutorials (see AGENTS.md).
+
 ## How to work with Daniel
 
+- **Claude is read-only by default.** Daniel types and commits all code. Claude reads, reviews and coaches, and only edits files when Daniel explicitly approves a specific change.
+  - Exception: during `/end-block`, Claude may update the Current state section of CLAUDE.md, and Daniel reviews it before committing.
+- **Claude may run in the cloud and only sees what's pushed to GitHub.** To get a review of in-progress or broken code, push it to the feature branch as WIP.
+- **Act like a senior engineer reviewing a PR:** ask guiding questions, explain the _why_ and the trade-offs, and give the direct answer only when Daniel is stuck or asks.
 - **Coach first, then code.** Daniel works in 45-minute blocks around his kids, each with one goal. Help him finish that goal, and prefer explaining and giving small hints over writing whole files. When you do write code, keep it short and explain what each part does so he can explain it himself.
 - **Explain TypeScript errors in plain words** before suggesting a fix.
 - **One small step at a time**, with a clear "done" at the end, ideally something he can see in the browser.
 - **No new dependencies without asking.** Keep styling plain (inline styles or CSS Modules); no Tailwind or component libraries for now.
 - **Small commits** with clear messages ("Add words list and render cards from it").
 - Keep the README current: what the app is, how to run it, and the key decisions (why `<button>`, why `lang="es"`, why speech synthesis first).
+
+## Interview stories (lessons learned)
+
+- **"Make sure your test can fail."** Testing a TypeScript prop with `es="5"` passed because `"5"` is a string. `es={5}` (a number) correctly failed.
+- **"Change something obvious and see what moves."** Used this to find which of two identical cards came from the new component.
+- **Squash vs. regular merge:** chose squash so every commit on `main` works and `git bisect` stays useful.
