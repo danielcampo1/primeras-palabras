@@ -8,5 +8,5 @@ export type Word = {
 export const words: Word[] = [
   { id: "perro", es: "Perro", en: "Dog", emoji: "🐕" },
   { id: "caballo", es: "Caballo", en: "Horse", emoji: "🐎" },
-  { id: "Gato", es: "Gato", en: "Cat", emoji: "🐈‍⬛" },
+  { id: "gato", es: "Gato", en: "Cat", emoji: "🐈‍⬛" },
 ];
