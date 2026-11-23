@@ -1,3 +1,11 @@
+import { words } from "./words";
+
+type WordCardProps = {
+  emoji: string;
+  es: string;
+  en: string;
+};
+
 export default function Home() {
   return (
     <main
@@ -7,17 +15,12 @@ export default function Home() {
         placeItems: "center",
       }}
     >
-      <WordCard emoji="🐕" es="Perro" en="Dog" />
-      <WordCard emoji="🐎" es="Caballo" en="Horse" />
+      {words.map((word) => (
+        <WordCard key={word.id} emoji={word.emoji} es={word.es} en={word.en} />
+      ))}
     </main>
   );
 }
-
-type WordCardProps = {
-  emoji: string;
-  es: string;
-  en: string;
-};
 
 function WordCard({ emoji, es, en }: WordCardProps) {
   return (
