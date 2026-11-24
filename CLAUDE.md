@@ -17,13 +17,14 @@ A bilingual Spanish/English "first words" app for Daniel's two young kids (about
 
 Because of job 2, see "How to work with Daniel" below. It matters as much as the code.
 
-## Current state (Nov 19, 2026)
+## Current state (Nov 23, 2026)
 
 - Done: app scaffolded and deployed to Vercel.
 - Done (Nov 18): two word cards on screen (🐕 Perro / Dog, 🐎 Caballo / Horse).
 - Done (Nov 19): extracted a reusable `WordCard` component in `app/page.tsx` with typed props (`WordCardProps`: `emoji`, `es`, `en`, all strings). Card markup now exists once; `Home` renders `<WordCard />` twice with hardcoded props. Merged to `main` via PR #1 (squash merge).
-- Next (Task 5): create `app/words.ts` with the `Word` type and a `words` array, then render cards in `page.tsx` with `.map()` (remember the `key` prop). Done when adding a word only means editing `words.ts`.
-- After that: make each card a `<button>` with an accessible name ("Perro, dog"), `lang="es"` on Spanish text, and the emoji `aria-hidden`.
+- Done (Nov 23, Task 5): added `app/words.ts` with the exported `Word` type (`id`, `es`, `en`, `emoji`) and a `words: Word[]` array (perro, caballo, gato). `Home` renders cards with `words.map()` and `key={word.id}`. `WordCardProps` stays separate from `Word` (props ≠ data model). Adding a word now only means editing `words.ts`. Merged via PR #3.
+- Next (Task 6): in `WordCard`, change the outer `<div>` to a `<button>`. Then give it the accessible name "Perro, dog", put `lang="es"` on the Spanish text and `aria-hidden="true"` on the emoji. Done when a screen reader (VoiceOver: Cmd+F5) reads "Perro, dog, button" for the first card and Tab moves between cards.
+- Concepts covered Nov 23: re-export (`export type { X } from`) vs import; React `key` is a prop name, the value comes from the data (`key={word.id}`, not a `key` field in the data); data model vs UI props; `tsc` prints nothing on success (`echo $?` → `0`).
 
 ### Workflow habits now in use
 
@@ -48,8 +49,8 @@ Because of job 2, see "How to work with Daniel" below. It matters as much as the
 
 **Dec 6 milestone:**
 
-5. `app/words.ts` + render with `.map()` ← next
-6. Card is a `<button>` with an accessible name, `lang="es"` and the emoji `aria-hidden`
+5. ~~`app/words.ts` + render with `.map()`~~ ✅ Nov 23
+6. Card is a `<button>` with an accessible name, `lang="es"` and the emoji `aria-hidden` ← next
 7. Grid layout (1–2 per row on a phone) + visible focus outline
 8. Tap to say the Spanish word (`speechSynthesis`)
 9. Then English after a pause, with a "playing" highlight
