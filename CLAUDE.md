@@ -17,14 +17,16 @@ A bilingual Spanish/English "first words" app for Daniel's two young kids (about
 
 Because of job 2, see "How to work with Daniel" below. It matters as much as the code.
 
-## Current state (Nov 23, 2026)
+## Current state (Nov 24, 2026)
 
 - Done: app scaffolded and deployed to Vercel.
 - Done (Nov 18): two word cards on screen (🐕 Perro / Dog, 🐎 Caballo / Horse).
 - Done (Nov 19): extracted a reusable `WordCard` component in `app/page.tsx` with typed props (`WordCardProps`: `emoji`, `es`, `en`, all strings). Card markup now exists once; `Home` renders `<WordCard />` twice with hardcoded props. Merged to `main` via PR #1 (squash merge).
 - Done (Nov 23, Task 5): added `app/words.ts` with the exported `Word` type (`id`, `es`, `en`, `emoji`) and a `words: Word[]` array (perro, caballo, gato). `Home` renders cards with `words.map()` and `key={word.id}`. `WordCardProps` stays separate from `Word` (props ≠ data model). Adding a word now only means editing `words.ts`. Merged via PR #3.
-- Next (Task 6): in `WordCard`, change the outer `<div>` to a `<button>`. Then give it the accessible name "Perro, dog", put `lang="es"` on the Spanish text and `aria-hidden="true"` on the emoji. Done when a screen reader (VoiceOver: Cmd+F5) reads "Perro, dog, button" for the first card and Tab moves between cards.
 - Concepts covered Nov 23: re-export (`export type { X } from`) vs import; React `key` is a prop name, the value comes from the data (`key={word.id}`, not a `key` field in the data); data model vs UI props; `tsc` prints nothing on success (`echo $?` → `0`).
+- Done (Nov 24, Task 6): `WordCard` is a native `<button>`. The inner elements are `<span style={{ display: "block" }}>`, because a button only allows phrasing content. The emoji has `aria-hidden="true"` and the Spanish word has `lang="es"`. A visually hidden comma (the `visuallyHidden: CSSProperties` const in `page.tsx`) gives the accessible name "Perro, Dog". We chose that over `aria-label` so `lang="es"` still applies. Verified in the DevTools Accessibility pane and with VoiceOver; Chrome + VoiceOver didn't switch to a Spanish voice (a screen reader/voice limitation, not markup). Merged via PR #4 with a one-line squash message. Old branches deleted.
+- Concepts covered Nov 24: why `<button>` beats `<div onClick>` (focus, Enter/Space, role); phrasing content; `aria-hidden` removes from the accessibility tree only; the 3 ways to hide (aria-hidden / visually hidden / display:none); reading "Type X is not assignable to type Y" (you gave X, it wants Y); literal widening (`"absolute"` → `string`) fixed by annotating `CSSProperties` (find the type by hovering the prop); `import type` is erased at build; `git branch -D` is needed after squash merges.
+- Next (Task 7): grid layout and a visible focus outline. Move the card styles into a CSS Module (`app/page.module.css`), because inline styles can't do `:focus-visible`. Make `<main>` a grid with 1 card per row on a phone and 2 on wider screens. Give the button a thick, high-contrast `:focus-visible` outline and `position: relative`, so the absolutely positioned hidden comma stays inside its card. Done when Tab shows a clear outline on each card, and DevTools device mode (iPhone width) shows 1–2 cards per row with no horizontal scroll.
 
 ### Workflow habits now in use
 
@@ -50,8 +52,8 @@ Because of job 2, see "How to work with Daniel" below. It matters as much as the
 **Dec 6 milestone:**
 
 5. ~~`app/words.ts` + render with `.map()`~~ ✅ Nov 23
-6. Card is a `<button>` with an accessible name, `lang="es"` and the emoji `aria-hidden` ← next
-7. Grid layout (1–2 per row on a phone) + visible focus outline
+6. ~~Card is a `<button>` with an accessible name, `lang="es"` and the emoji `aria-hidden`~~ ✅ Nov 24
+7. Grid layout (1–2 per row on a phone) + visible focus outline ← next
 8. Tap to say the Spanish word (`speechSynthesis`)
 9. Then English after a pause, with a "playing" highlight
 
